@@ -1,0 +1,61 @@
+version: '2.0'
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+intents:
+- greet
+- mood_unhappy
+- goodbye
+- stop
+- inform
+- affirm
+- deny
+- mood_great
+- get_started
+- bot_challenge
+- weather
+- weather_for_location
+- city_info
+- thanks
+entities:
+- location
+slots:
+  location:
+    type: text
+    influence_conversation: true
+responses:
+  utter_greet:
+  - text: Hey! How are you?
+  - text: Hey! How may i assist you?
+  - text: What I can do for you today?
+  - text: Hi, there !!
+  - text: Nice to meet you.
+  utter_intro:
+  - text: Hi! My name is Lia :) Nice to meet you!
+  utter_cheer_up:
+  - text: 'Here is something to cheer you up:'
+    image: https://i.imgur.com/nGF1K8f.jpg
+  utter_did_that_help:
+  - text: Did that help you?
+  utter_happy:
+  - text: Great, carry on!
+  utter_goodbye:
+  - text: Bye
+  utter_ask_location:
+  - text: of where?
+  - text: In what city?
+  utter_getting_weather:
+  - text: Ok, getting weather of [location] ...
+  utter_welcome:
+  - text: Welcome
+  utter_iamabot:
+  - text: I am a bot, powered by Rasa.
+actions:
+#- action_PN_2_save_name
+#- utter_cheer_up
+#- utter_goodbye
+#- utter_greet
+#- utter_iamabot
+#- utter_intro
+#- utter_ask_location
+- action_weather

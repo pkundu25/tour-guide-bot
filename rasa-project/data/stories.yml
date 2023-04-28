@@ -1,0 +1,78 @@
+version: "2.0"
+
+stories:
+
+- story: happy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: get_started
+  - action: utter_intro
+  - intent: mood_great
+  - action: utter_happy
+
+- story: sad path 1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: get_started
+  - action: utter_intro
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - intent: mood_unhappy
+  - action: utter_did_that_help
+  - intent: affirm
+  - action: utter_happy
+
+- story: sad path 2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - intent: mood_unhappy
+  - action: utter_did_that_help
+  - intent: deny
+  - action: utter_goodbye
+
+# # Stories for weather to be checked and added later
+- story: weather 1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: weather
+  - action: utter_ask_location
+  - intent: city_info 
+    entities: 
+      - location: "Delhi"
+      - slot: {"location": "Delhi"} 
+  - action: action_weather
+  - intent: thanks
+  - action: utter_welcome
+
+- story: weather 2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: weather_for_location
+    entities: 
+      - location: "Mumbai"
+      - slot: {"location": "Mumbai"} 
+  - action: action_weather
+  - intent: thanks
+  - action: utter_welcome  
+
+#- story: interactive_story_1
+  #steps:
+  #- intent: greet
+  #- action: utter_greet
+  #- action: utter_greet
+  #- intent: mood_unhappy
+  #- action: utter_cheer_up
+  #- intent: goodbye
+  #- action: utter_intro
+  #- intent: goodbye
+  #- action: utter_intro
+  #- action: utter_goodbye
+  #- action: utter_goodbye
+  #- intent: stop
