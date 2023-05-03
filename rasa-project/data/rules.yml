@@ -11,3 +11,13 @@ rules:
   steps:
   - intent: bot_challenge
   - action: utter_iamabot
+
+- rule: Say welcome anytime the user says thanks
+  steps:
+  - intent: thanks
+  - action: utter_welcome  
+
+- rule: Say greetings anytime the user says hey
+  steps:
+  - intent: greet
+  - action: action_greet_timeofday  

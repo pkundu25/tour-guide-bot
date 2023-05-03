@@ -57,6 +57,20 @@ you will be able to see the chatbot icon visible on right bottom corner of the w
 
 Click to open and you are ready to start conversing with your TourBot.
 
+## Viewing the chat logs:
+
+All the conversations between the user and the bot are captured and stored into user-chatDB inside rasa-project.
+
+To view chat logs, first install SQLiteStudio on your machine. Follow the below procedures: 
+
+1) Open the GUI of SQLiteStudio application.
+
+2) Select 'Database' from menu bar and select 'add a database' to add user-chatDB and then connect to the database.   
+
+3) On the left, you can view Tables > events. Double click on 'events' and select 'Data' from menu bar to view the details.
+You can view the session-wise conversations between the user and the bot with timestamp. All chats are logged under 'data'
+Just choose user and bot against the column 'type_name' to view the text under 'data'.
+ 
 Further development is in progress and GitHub will be updated accordingly. 
 
 ### References:

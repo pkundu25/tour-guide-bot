@@ -32,6 +32,14 @@ action_endpoint:
 #    username: <username used for authentication>
 #    password: <password used for authentication>
 
+tracker_store:
+    type: SQL
+    dialect: "sqlite"
+    url: "sqlite:///./user-chatDB.db"
+    db: "D:/Tourist-guide-chatbot/tour-guide-bot/user-chatDB.db"
+#    username: <username used for authentication>
+#    password: <password used for authentication>
+
 # Event broker which all conversation events should be streamed to.
 # https://rasa.com/docs/rasa/event-brokers
 

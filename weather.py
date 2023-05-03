@@ -12,7 +12,9 @@ def Weather(city):
     return weather_data['main']
 
 
+'''
 if __name__ == "__main__":
   city = 'Delhi'
   temperature=Weather(city)['temp']
   print(temperature)
+'''  

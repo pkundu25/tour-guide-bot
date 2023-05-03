@@ -2,44 +2,45 @@ version: "2.0"
 
 stories:
 
-- story: happy path
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: get_started
-  - action: utter_intro
-  - intent: mood_great
-  - action: utter_happy
+#- story: happy path
+  #steps:
+  #- intent: greet
+  #- action: utter_greet
+  #- intent: get_started
+  #- action: utter_intro
+  #- intent: mood_great
+  #- action: utter_happy
 
-- story: sad path 1
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: get_started
-  - action: utter_intro
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - intent: mood_unhappy
-  - action: utter_did_that_help
-  - intent: affirm
-  - action: utter_happy
+#- story: sad path 1
+  #steps:
+#   - intent: greet
+#   - action: utter_greet
+#   - intent: get_started
+#   - action: utter_intro
+#   - intent: mood_unhappy
+#   - action: utter_cheer_up
+#   - intent: mood_unhappy
+#   - action: utter_did_that_help
+#   - intent: affirm
+#   - action: utter_happy
 
-- story: sad path 2
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - intent: mood_unhappy
-  - action: utter_did_that_help
-  - intent: deny
-  - action: utter_goodbye
+# - story: sad path 2
+#   steps:
+#   - intent: greet
+#   - action: utter_greet
+#   - intent: mood_unhappy
+#   - action: utter_cheer_up
+#   - intent: mood_unhappy
+#   - action: utter_did_that_help
+#   - intent: deny
+#   - action: utter_goodbye
 
-# # Stories for weather to be checked and added later
+# # Stories for weather added here
 - story: weather 1
   steps:
-  - intent: greet
-  - action: utter_greet
+  #- intent: greet  
+  #- action: utter_greet
+  #- action: action_greet_timeofday
   - intent: weather
   - action: utter_ask_location
   - intent: city_info 
@@ -47,20 +48,27 @@ stories:
       - location: "Delhi"
       - slot: {"location": "Delhi"} 
   - action: action_weather
-  - intent: thanks
-  - action: utter_welcome
+  #- slot_was_set:
+    #- my_slot: null  
+  - intent: weather_humidity
+  - action: action_weather_humidity
+  #- intent: thanks
+  #- action: utter_welcome
 
 - story: weather 2
   steps:
   - intent: greet
-  - action: utter_greet
+  #- action: utter_greet
+  - action: action_greet_timeofday
   - intent: weather_for_location
     entities: 
       - location: "Mumbai"
       - slot: {"location": "Mumbai"} 
   - action: action_weather
-  - intent: thanks
-  - action: utter_welcome  
+  #- slot_was_set:
+    #- my_slot: null  
+  #- intent: thanks
+  #- action: utter_welcome  
 
 #- story: interactive_story_1
   #steps:
@@ -76,3 +84,10 @@ stories:
   #- action: utter_goodbye
   #- action: utter_goodbye
   #- intent: stop
+
+#- story: set slot to none
+  #steps:
+    # ... other story steps
+    #- action: my_custom_action
+    #- slot_was_set:
+      #- my_slot: null

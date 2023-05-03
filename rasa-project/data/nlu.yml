@@ -111,9 +111,23 @@ nlu:
     - [Kolkata](location)
     - [Bangalore](location)
     - [London](location)
+- intent: weather_humidity
+  examples: |
+    - what is the humidity in [Noida](location)
+    - what is the humidity in [New Delhi](location)
+    - humidity of [Mumbai] (location)
+    - Today's humidity in [Bangalore](location)
+    - [Kolkata] (location) humidity
+    - Tell me humidity of [Hyderabad](location)
+    - Can you tell me humidity of [London](location)        
 - intent: thanks
   examples: |
     - thanks
     - thank you
     - OK
+    - Thanks
+    - many thanks
+    - thanks a lot
+    - thank you so much
+    - thank u very much
 
