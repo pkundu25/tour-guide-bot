@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Demo: Local search with the Geocoding API</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
+    <link
+      href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css"
+      type="text/css"
+    />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+
+    <script>
+
+      //var lng0 =  75.8682 
+      //var lat0 =  22.720362 
+      //var lng1 =  -81.146776 
+      //var lat1 =  38.352881 
+      //var lng2 =  5.470894 
+      //var lat2 =  60.417722 
+      //var lng3 =  -1.669896 
+      //var lat3 =  47.1978043 
+      //var lng4 =  75.69005 
+      //var lat4 =  32.1379 
+
+      var lng00 = {{ lng0 }}
+      var lat00 = {{ lat0 }}
+      var lng10 = {{ lng1 }}
+      var lat10 = {{ lat1 }}
+      var lng20 = {{ lng2 }}
+      var lat20 = {{ lat2 }}
+      var lng30 = {{ lng3 }}
+      var lat30 = {{ lat3 }}
+      var lng40 = {{ lng4 }}
+      var lat40 = {{ lat4 }}
+      console.log(lng00)
+      console.log(lat00)
+      console.log(lng10)
+      console.log(lat10)
+      console.log(lng20)
+      console.log(lat20)
+      console.log(lng30)
+      console.log(lat30)
+      console.log(lng40)
+      console.log(lat40)
+      
+
+      mapboxgl.accessToken = 'pk.eyJ1IjoicGt1bmR1MjUiLCJhIjoiY2xoaWwwNDBrMDFyaDNrcGNvMmhrZXlsaCJ9.sOxWZOMT9vWN-YyhQm4cwg';
+      const map = new mapboxgl.Map({
+        container: 'map', // Container ID
+        style: 'mapbox://styles/mapbox/streets-v12', // Map style to use
+        //center: [-122.25948, 37.87221], // Starting position [lng, lat]
+        center:[lng00, lat00], // Starting position [lng, lat]
+        zoom: 12 // Starting zoom level
+      });
+
+      console.log("1")
+      const marker0 = new mapboxgl.Marker() // Initialize a new marker
+        .setLngLat([lng00, lat00]) // Marker [lng, lat] coordinates
+        .addTo(map); // Add the marker to the map
+      console.log("2")
+      const marker1 = new mapboxgl.Marker() // Initialize a new marker
+        .setLngLat([lng10, lat10]) // Marker [lng, lat] coordinates
+        .addTo(map); // Add the marker to the map
+      console.log("3")  
+      const marker2 = new mapboxgl.Marker() // Initialize a new marker
+        .setLngLat([lng20, lat20]) // Marker [lng, lat] coordinates
+        .addTo(map); // Add the marker to the map
+      console.log("4")
+      const marker3 = new mapboxgl.Marker() // Initialize a new marker
+        .setLngLat([lng30, lat30]) // Marker [lng, lat] coordinates
+        .addTo(map); // Add the marker to the map
+      console.log("5")
+      const marker4 = new mapboxgl.Marker() // Initialize a new marker
+        .setLngLat([lng40, lat40]) // Marker [lng, lat] coordinates
+        .addTo(map); // Add the marker to the map
+
+      
+      console.log("6")
+      const geocoder = new MapboxGeocoder({
+        // Initialize the geocoder
+        accessToken: mapboxgl.accessToken, // Set the access token
+        mapboxgl: mapboxgl, // Set the mapbox-gl instance
+        marker: false, // Do not use the default marker style
+        placeholder: 'Search for places in Berkeley', // Placeholder text for the search bar
+        //bbox: [-122.30937, 37.84214, -122.23715, 37.89838], // Boundary for Berkeley
+        //bbox: [lng1, lat1, lng2, la2], //[73.675406, 15.40937, 74.282659, 15.80082],
+        proximity: {
+          longitude: lng00,
+          latitude: lat00
+        } // Coordinates of UC Berkeley
+      });
+
+      // Add the geocoder to the map
+      map.addControl(geocoder);
+      console.log("7")
+      // After the map style has loaded on the page,
+      // add a source layer and default styling for a single point
+      map.on('load', () => {
+        map.addSource('single-point', {
+          'type': 'geojson',
+          'data': {
+            'type': 'FeatureCollection',
+            'features': []
+          }
+        });
+        console.log("8")
+        map.addLayer({
+          'id': 'point',
+          'source': 'single-point',
+          'type': 'circle',
+          'paint': {
+            'circle-radius': 10,
+            'circle-color': '#448ee4'
+          }
+        });
+        console.log("9")
+        // Listen for the `result` event from the Geocoder // `result` event is triggered when a user makes a selection
+        //  Add a marker at the result's coordinates
+        geocoder.on('result', (event) => {
+          map.getSource('single-point').setData(event.result.geometry);
+        });
+        console.log("10")
+      });
+    </script>
+  </body>
+</html>

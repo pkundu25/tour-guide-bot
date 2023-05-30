@@ -1,5 +1,6 @@
 # TourBot
-This is an virtual assistant chatbot that can help the tourists tell the weather for any city etc. 
+This is a virtual assistant chatbot that can help the tourists tell the weather for any city and places 
+around a city and points of interests such as beaches, hotels, restaurants around a city etc. 
 
 We have used RASA framework to build the chatbot using NLP.
 
@@ -25,7 +26,8 @@ Run git clone command to clone the repo from GitHub. Check the project structure
 
 We are now ready to run the bot.
 This chatbot makes use of weather API obtained from https://openweathermap.org/api which is free and 
-easy to use.
+easy to use. For viewing maps, we have used geocoding API from https://docs.mapbox.com/api/search/geocoding/
+which is free to use.
 
 
 ## Running the chatbot:
@@ -79,3 +81,4 @@ Further development is in progress and GitHub will be updated accordingly.
 3. https://rasa.com/docs/rasa/command-line-interface/
 3. https://medium.com/featurepreneur/integrating-chatbot-with-website-rasa-flask-4569f18d31be
 4. https://openweathermap.org/
+5. https://docs.mapbox.com/api/search/geocoding/

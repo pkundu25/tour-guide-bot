@@ -17,7 +17,7 @@ rules:
   - intent: thanks
   - action: utter_welcome  
 
-- rule: Say greetings anytime the user says hey
-  steps:
-  - intent: greet
-  - action: action_greet_timeofday  
+#- rule: Say greetings anytime the user says hey
+  #steps:
+  #- intent: greet
+  #- action: action_greet_timeofday  

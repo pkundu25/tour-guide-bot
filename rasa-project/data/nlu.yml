@@ -104,7 +104,7 @@ nlu:
     - Can you tell me weather of [London](location)    
 - intent: city_info
   examples: |
-    - [New Delhi](location)
+    - [Goa](location)
     - [India](location)
     - [Mumbai](location)
     - [Noida](location)
@@ -130,4 +130,44 @@ nlu:
     - thanks a lot
     - thank you so much
     - thank u very much
+- intent: places_around_me
+  examples: |
+    - what are places around [Goa](location)
+    - Name the places in close proximity of [Goa](location)
+    - places nearby [Goa] (location)
+    - i want to know places in and around [Goa](location)
+    - [Goa] (location) nearby locations
+    - Tell me places closer to [Goa](location)
+    - Can you tell me places nearby [Goa](location)     
+- intent: poi_around_me
+  examples: |
+    - what are beaches(poi) around [Goa](location)
+    - Name the beaches(poi) in close proximity of [Goa](location)
+    - beaches(poi) nearby [Goa] (location)
+    - i want to know beaches(poi) in and around [Goa](location)
+    - [Goa] (location) nearby beaches(poi)
+    - Tell me beaches(poi) closer to [Goa](location)
+    - Can you tell me beaches(poi) nearby [Goa](location)  
+    - what are hotels(poi) around [Goa](location)
+    - Name the hotels(poi) in close proximity of [Goa](location)
+    - hotels(poi) nearby [Goa] (location)
+    - i want to know hotels(poi) in and around [Goa](location)
+    - [Goa] (location) nearby hotels(poi)
+    - Tell me hotels(poi) closer to [Goa](location)
+    - Can you tell me hotels(poi) nearby [Goa](location)
+    - what are restaurants(poi) around [Goa](location)
+    - Name the restaurants(poi) in close proximity of [Goa](location)
+    - restaurants(poi) nearby [Goa] (location)
+    - i want to know restaurants(poi) in and around [Goa](location)
+    - [Goa] (location) nearby restaurants(poi)
+    - Tell me restaurants(poi) closer to [Goa](location)
+    - Can you tell me restaurants(poi) nearby [Goa](location) 
+    - what are hospitals(poi) around [Goa](location)
+    - Name the hospitals(poi) in close proximity of [Goa](location)
+    - hospitals(poi) nearby [Goa] (location)
+    - i want to know hospitals(poi) in and around [Goa](location)
+    - [Goa] (location) nearby hospitals(poi)
+    - Tell me hospitals(poi) closer to [Goa](location)
+    - Can you tell me hospitals(poi) nearby [Goa](location)      
+
 

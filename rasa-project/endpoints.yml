@@ -36,7 +36,7 @@ tracker_store:
     type: SQL
     dialect: "sqlite"
     url: "sqlite:///./user-chatDB.db"
-    db: "D:/Tourist-guide-chatbot/tour-guide-bot/user-chatDB.db"
+#    db: "D:/Tourist-guide-chatbot/tour-guide-bot/user-chatDB.db"
 #    username: <username used for authentication>
 #    password: <password used for authentication>
 

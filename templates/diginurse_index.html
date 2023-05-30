@@ -15,8 +15,16 @@
     <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"> -->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='scss/s.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   <style>
+      iframe[iframetag] {
+         border: none;
+      }
+   </style>
 
-    <title>TourBot</title>
+
+    <meta charset="utf-8" />
+    <title>Tourmate</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
     <link
@@ -44,16 +52,35 @@
 
   </head>
   <body>
+<!--    <div class="container">-->
+<!--      -->
+<!--    <button type="button" class="btn btn-primary" onclick="flow('configure');">Configure</button>-->
+<!--    <button type="button" class="btn btn-secondary" onclick="flow('new_treatment');">New Treatment</button>-->
+<!--    <button type="button" class="btn btn-success">Success</button>-->
+<!--    <button type="button" class="btn btn-danger">Danger</button>-->
+<!--    <button type="button" class="btn btn-warning">Warning</button>-->
+<!--    <button type="button" class="btn btn-info">Info</button>-->
+<!--    <button type="button" class="btn btn-light">Light</button>-->
+<!--    <button type="button" class="btn btn-dark">Dark</button>-->
+<!--    -->
+<!--    <button type="button" class="btn btn-link">Link</button>-->
 
+<!--    -->
+<!--    </div>-->
+<!--      <img onclick="toggle_visibility('chatWindow');" class="chat_button" src="{{ url_for('static',filename='imgs/chatbot.svg') }}"/>-->
 
-    <div id="includeHtml"></div>
-               
-     <div>
+    <div id="includedContent">
+                </div>
+
+<!--     <div>-->
+<!--   <div id="iframeDiv">-->
+<!--      <iframe src="inner.html"  width="800" height="800" ></iframe>-->
+<!--   </div>-->
+
       <div id="chatWindow">
-
         <div id="chatbox">
-          <h1>TourBot</h1>
-          
+          <h1>Tourmate</h1>
+
         </div>
         <div id="chathistory">
         </div>
@@ -62,8 +89,6 @@
           
           <!-- <button id="buttonInput" onclick="reStart();" value="restart">End</button> -->
         </div>
-  
-        
       </div>
       <script>
 
@@ -168,14 +193,13 @@
 
               $.get("/get", { msg: rawText }).done(function(data) {
               var botHtml = data;
-              // console.log("adddd")
-   
+              console.log(botHtml)
+              $('#includedContent').html(botHtml);
+
               sleep(500);
               $("#chathistory > .botTyping").remove();
               $("#chathistory").append(botHtml);
 
-              $('#includedHtml').html(botHtml);
-              
               objDiv = document.getElementById("chathistory");
               objDiv.scrollTop = objDiv.scrollHeight;
               // document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});

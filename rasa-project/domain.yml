@@ -17,13 +17,30 @@ intents:
 - weather_for_location
 - weather_humidity
 - city_info
+- places_around_me
+- poi_around_me
 - thanks
 entities:
 - location
+- name
+- lng0
+- lat0
+- lng1
+- lat1
+- lng2
+- lat2
+- lng3
+- lat3
+- lng4
+- lat4
+- poi
 slots:
   location:
     type: text
     influence_conversation: true
+  poi:
+    type: text
+    influence_conversation: true    
 responses:
   utter_greet:
   - text: Hey! How are you?
@@ -47,11 +64,34 @@ responses:
   - text: In what city?
   utter_getting_weather:
   - text: Ok, getting weather of [location] ...
+  #utter_showing_places:
+  #- text: Ok, showing places around [location] ...
   utter_welcome:
   - text: Welcome
   - text: welcome
   utter_iamabot:
   - text: I am a bot, powered by Rasa.
+  #utter_user_details:
+  #- custom:
+    #text: "Here are the user provided details..."
+    #name: "{name}"
+    #city: "{location}"
+  utter_user_details:
+  - custom:
+      blocks:
+        city: "{location}"
+        center: 
+          lng0: "{lng0}"
+          lat0: "{lat0}"    
+          lng1: "{lng1}"
+          lat1: "{lat1}"      
+          lng2: "{lng2}"
+          lat2: "{lat2}" 
+          lng3: "{lng3}"
+          lat3: "{lat3}" 
+          lng4: "{lng4}"
+          lat4: "{lat4}"  
+   
 actions:
 #- action_PN_2_save_name
 #- utter_cheer_up
@@ -60,6 +100,8 @@ actions:
 #- utter_iamabot
 #- utter_intro
 #- utter_ask_location
-- action_weather
-- action_greet_timeofday
-- action_weather_humidity
+#- action_weather
+#- action_greet_timeofday
+#- action_weather_humidity
+- action_local_search
+- action_local_search_poi
