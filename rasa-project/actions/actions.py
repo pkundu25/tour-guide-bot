@@ -30,8 +30,6 @@ from rasa_sdk.events import SlotSet, FollowupAction
 from utils.helper import LocalSearch
 
 
-
-
 logging.basicConfig(level=logging.DEBUG)
 
 '''
@@ -215,6 +213,85 @@ class ActionSearchPlaces(Action):
 
             lng0 = center0[0]
             lat0 = center0[1]
+            lng1 = None
+            lat1 = None
+            lng2 = None
+            lat2 = None
+            lng3 = None
+            lat3 = None
+            lng4 = None
+            lat4 = None       
+            
+        else:     
+            center0 = centers[0]
+            center1 = centers[1] 
+            center2 = centers[2] 
+            center3 = centers[3] 
+            center4 = centers[4]                     
+
+            lng0 = center0[0]
+            lat0 = center0[1]
+            lng1 = center1[0]
+            lat1 = center1[1]
+            lng2 = center2[0]
+            lat2 = center2[1]
+            lng3 = center3[0]
+            lat3 = center3[1]
+            lng4 = center4[0]
+            lat4 = center4[1]
+
+            #response = "You can find the places in the map at {}, {}.".format(lng,lat)
+            #dispatcher.utter_message(response)
+
+        dispatcher.utter_message(
+            template ="utter_user_details",            
+            lng0 = lng0,
+            lat0 = lat0,
+            lng1 = lng1,
+            lat1 = lat1,
+            lng2 = lng2,
+            lat2 = lat2,
+            lng3 = lng3,
+            lat3 = lat3,
+            lng4 = lng4,
+            lat4 = lat4,
+            city = city            
+        )
+
+        #return [SlotSet('location', None)]   
+        return []
+
+
+class ActionSearchPoi(Action):
+
+    def name(self) -> Text:
+        return "action_local_search_poi"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        
+        city = tracker.get_slot('location')
+        poi = tracker.get_slot('poi')
+        #poi = "beaches"
+        print(poi)
+        search = poi + " nearby " + city
+        print(search)
+
+        #search1 = "Indore"
+        # List of center coordinates around the search place
+        centers =  LocalSearch(search, "poi")
+
+        #(center, bbox)  = LocalSearch(city)
+
+        #response = "You can find the places in the map at {}, {}.".format(lng,lat)
+        #dispatcher.utter_message(response)
+
+        if len(centers) < 5:
+            center0 = centers[0]                
+
+            lng0 = center0[0]
+            lat0 = center0[1]
 
             dispatcher.utter_message(
                 template ="utter_user_details",            
@@ -222,7 +299,7 @@ class ActionSearchPlaces(Action):
                 lat0 = lat0,
                 city = city            
             )
-        else:     
+        else: 
             center0 = centers[0]
             center1 = centers[1] 
             center2 = centers[2] 
@@ -255,69 +332,8 @@ class ActionSearchPlaces(Action):
                 lat3 = lat3,
                 lng4 = lng4,
                 lat4 = lat4,
-                city = city            
+                city = search            
             )
-
-        #return [SlotSet('location', None)]   
-        return []
-
-
-class ActionSearchPoi(Action):
-
-    def name(self) -> Text:
-        return "action_local_search_poi"
-
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        
-        city = tracker.get_slot('location')
-        poi = "beaches"
-        search = poi + " nearby " + city
-
-        #search1 = "Indore"
-        # List of center coordinates around the search place
-        centers =  LocalSearch(search, "poi")
-
-        #(center, bbox)  = LocalSearch(city)
-
-        #response = "You can find the places in the map at {}, {}.".format(lng,lat)
-        #dispatcher.utter_message(response)
-
-        center0 = centers[0]
-        center1 = centers[1] 
-        center2 = centers[2] 
-        center3 = centers[3] 
-        center4 = centers[4]                     
-
-        lng0 = center0[0]
-        lat0 = center0[1]
-        lng1 = center1[0]
-        lat1 = center1[1]
-        lng2 = center2[0]
-        lat2 = center2[1]
-        lng3 = center3[0]
-        lat3 = center3[1]
-        lng4 = center4[0]
-        lat4 = center4[1]
-
-        #response = "You can find the places in the map at {}, {}.".format(lng,lat)
-        #dispatcher.utter_message(response)
-
-        dispatcher.utter_message(
-            template ="utter_user_details",            
-            lng0 = lng0,
-            lat0 = lat0,
-            lng1 = lng1,
-            lat1 = lat1,
-            lng2 = lng2,
-            lat2 = lat2,
-            lng3 = lng3,
-            lat3 = lat3,
-            lng4 = lng4,
-            lat4 = lat4,
-            city = search            
-        )
 
         #return [SlotSet('location', None)]   
         return []

@@ -1,5 +1,5 @@
 # TourBot
-This is a virtual assistant chatbot that can help the tourists tell the weather for any city and places 
+This is a virtual assistant chatbot that can help the tourists tell the weather for any city, places 
 around a city and points of interests such as beaches, hotels, restaurants around a city etc. 
 
 We have used RASA framework to build the chatbot using NLP.

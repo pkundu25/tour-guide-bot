@@ -47,24 +47,37 @@ def get_bot_response():
 
     if loc is not None:
         print(loc)
+        centers = loc['center']
+        L = []
+        for i in centers.keys():
+            if centers[i] != "None" :
+                f = float(centers[i])
+                L.append(f)
+
 
         city = loc['city']
 
+        return render_template("index1.html", latlong = L)
+
+        '''
         centers = loc['center']
         if len(centers) < 5:
             lng0 = centers['lng0']
             lat0 = centers['lat0']
-            #print(lng1, lat1, lng2, lat2)
+            lng1 = None
+            lat1 = None
+            lng2 = None
+            lat2 = None
+            lng3 = None
+            lat3 = None
+            lng4 = None
+            lat4 = None
 
-            # Forming a dict containing coordinate values thus extracted
-            coord = {
-            "lng0" : lng0, "lat0" : lat0
-            }
 
-            #return render_template("index1.html")
-            return render_template('index1.html', lng0 = coord['lng0'], lat0 = coord['lat0'])
 
-        else:         
+
+        else:  
+
             lng0 = centers['lng0']
             lat0 = centers['lat0']
             lng1 = centers['lng1']
@@ -79,15 +92,20 @@ def get_bot_response():
             #print(lng1, lat1, lng2, lat2)
 
             # Forming a dict containing coordinate values thus extracted
-            coord = {
-            "lng0" : lng0, "lat0" : lat0, "lng1": lng1, "lat1": lat1, "lng2": lng2, "lat2": lat2, "lng3": lng3, "lat3": lat3,
-            "lng4": lng4, "lat4": lat4
-            }
+        coord = {
+        "lng0" : lng0, "lat0" : lat0, "lng1": lng1, "lat1": lat1, "lng2": lng2, "lat2": lat2, "lng3": lng3, "lat3": lat3,
+        "lng4": lng4, "lat4": lat4
+        }
 
-            #return render_template("index1.html")
-            return render_template('index1.html', lng0 = coord['lng0'], lat0 = coord['lat0'], lng1 = coord['lng1'], lat1 = coord['lat1'],
-                                lng2 = coord['lng2'], lat2 = coord['lat2'], lng3 = coord['lng3'], lat3 = coord['lat3'], 
-                                lng4 = coord['lng4'], lat4 = coord['lat4'])
+        
+        #return render_template("index1.html")
+        return render_template('index1.html', lng0 = coord['lng0'], lat0 = coord['lat0'], lng1 = coord['lng1'], lat1 = coord['lat1'],
+                            lng2 = coord['lng2'], lat2 = coord['lat2'], lng3 = coord['lng3'], lat3 = coord['lat3'], 
+                            lng4 = coord['lng4'], lat4 = coord['lat4'])
+
+        '''                            
+    
+
 
     else:    
         if final_text == "":

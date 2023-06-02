@@ -101,7 +101,7 @@ actions:
 #- utter_intro
 #- utter_ask_location
 #- action_weather
-#- action_greet_timeofday
+- action_greet_timeofday
 #- action_weather_humidity
 - action_local_search
 - action_local_search_poi
