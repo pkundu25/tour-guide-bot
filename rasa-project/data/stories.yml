@@ -70,117 +70,37 @@ stories:
   #- intent: thanks
   #- action: utter_welcome  
 
-- story: local search 1
-  steps:
+#- story: local search 1
+  #steps:
   #- intent: greet
   #- action: utter_greet
   #- action: action_greet_timeofday
-  - intent: places_around_me
-    entities: 
-      - location: "Goa"
-      - slot: {"location": "Goa"} 
+  #- intent: places_around_me
+    #entities: 
+      #- location: "Goa"
+      #- slot: {"location": "Goa"} 
   #- action: utter_showing_places
-  - action: action_local_search
+  #- action: action_local_search
   #- slot_was_set:
     #- my_slot: null  
   #- intent: thanks
   #- action: utter_welcome  
 
-- story: local search 2
-  steps:
+#- story: local search 2
+  #steps:
   #- intent: greet
   #- action: utter_greet
   #- action: action_greet_timeofday
-  - intent: poi_around_me
+  #- intent: poi_around_me
     #entities: 
       #- poi: "beaches"
       #- slot: {"poi": "beaches"} 
   #- action: utter_showing_places
-  - action: action_local_search_poi
-  #- slot_was_set:
-    #- my_slot: null  
-  #- intent: thanks
-  #- action: utter_welcome
-
-#- story: local search 3
-  #steps:
-  #- intent: greet
-  #- action: utter_greet
-  #- action: action_greet_timeofday
-  #- intent: poi_around_me
-    #entities: 
-      #- poi: "restaurants"
-      #- slot: {"poi": "restaurants"} 
-  #- action: utter_showing_places
   #- action: action_local_search_poi
   #- slot_was_set:
     #- my_slot: null  
   #- intent: thanks
-  #- action: utter_welcome
-
-#- story: local search 4
-  #steps:
-  #- intent: greet
-  #- action: utter_greet
-  #- action: action_greet_timeofday
-  #- intent: poi_around_me
-    #entities: 
-      #- poi: "hotels"
-      #- slot: {"poi": "hotels"} 
-  #- action: utter_showing_places
-  #- action: action_local_search_poi
-  #- slot_was_set:
-    #- my_slot: null  
-  #- intent: thanks
-  #- action: utter_welcome
-
-#- story: local search 5
-  #steps:
-  #- intent: greet
-  #- action: utter_greet
-  #- action: action_greet_timeofday
-  #- intent: poi_around_me
-    #entities: 
-      #- poi: "hospitals"
-      #- slot: {"poi": "hospitals"} 
-  #- action: utter_showing_places
-  #- action: action_local_search_poi
-  #- slot_was_set:
-    #- my_slot: null  
-  #- intent: thanks
-  #- action: utter_welcome 
-
-#- story: local search 6
-  #steps:
-  #- intent: greet
-  #- action: utter_greet
-  #- action: action_greet_timeofday
-  #- intent: poi_around_me
-    #entities: 
-      #- poi: "petrol pumps"
-      #- slot: {"poi": "petrol pumps"} 
-  #- action: utter_showing_places
-  #- action: action_local_search_poi
-  #- slot_was_set:
-    #- my_slot: null  
-  #- intent: thanks
-  #- action: utter_welcome
-
-#- story: local search 7
-  #steps:
-  #- intent: greet
-  #- action: utter_greet
-  #- action: action_greet_timeofday
-  #- intent: poi_around_me
-    #entities: 
-      #- poi: "atm"
-      #- slot: {"poi": "atm"} 
-  #- action: utter_showing_places
-  #- action: action_local_search_poi
-  #- slot_was_set:
-    #- my_slot: null  
-  #- intent: thanks
-  #- action: utter_welcome            
+  #- action: utter_welcome  
 
 #- story: interactive_story_1
   #steps:

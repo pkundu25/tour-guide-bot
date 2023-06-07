@@ -154,6 +154,7 @@ def LocalSearch(search, place_type):
       #Final_url = "https://api.mapbox.com/geocoding/v5/mapbox.places/" + city + ".json" + "?proximity=ip" + "&access_token=" + access_token
       url = "https://api.mapbox.com/geocoding/v5/mapbox.places/" + search + ".json?limit=10&country=in&proximity=ip&types="+ place_type + "&access_token=" + access_token      
           
+      print(url)
       local_search_data = requests.get(url).json()
       features = local_search_data['features']
       print(features)
@@ -172,16 +173,6 @@ def LocalSearch(search, place_type):
       print(center_list)        
       return center_list
       
-#search1 = "Goa India"
-#L =  LocalSearch(search1, "place")
-#print("Search  : " + search1)
-#for i in L:
-    #print(i)
-
-
-
-
-
 '''
 if __name__ == "__main__":
   #city = 'Berkeley CA'

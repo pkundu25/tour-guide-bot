@@ -18,7 +18,6 @@ intents:
 - weather_humidity
 - city_info
 - places_around_me
-- poi_around_me
 - thanks
 entities:
 - location
@@ -104,4 +103,4 @@ actions:
 - action_greet_timeofday
 #- action_weather_humidity
 - action_local_search
-- action_local_search_poi
+#- action_local_search_poi

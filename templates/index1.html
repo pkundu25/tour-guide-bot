@@ -33,38 +33,38 @@
 
     <script>
 
-      //var lng0 =  75.8682 
-      //var lat0 =  22.720362 
-      //var lng1 =  -81.146776 
-      //var lat1 =  38.352881 
-      //var lng2 =  5.470894 
-      //var lat2 =  60.417722 
-      //var lng3 =  -1.669896 
-      //var lat3 =  47.1978043 
-      //var lng4 =  75.69005 
-      //var lat4 =  32.1379 
+              //var lng0 =  75.8682 
+              //var lat0 =  22.720362 
+              //var lng1 =  -81.146776 
+              //var lat1 =  38.352881 
+              //var lng2 =  5.470894 
+              //var lat2 =  60.417722 
+              //var lng3 =  -1.669896 
+              //var lat3 =  47.1978043 
+              //var lng4 =  75.69005 
+              //var lat4 =  32.1379 
 
-      var lng00 = {{ lng0 }}
-      var lat00 = {{ lat0 }}
-      var lng10 = {{ lng1 }}
-      var lat10 = {{ lat1 }}
-      var lng20 = {{ lng2 }}
-      var lat20 = {{ lat2 }}
-      var lng30 = {{ lng3 }}
-      var lat30 = {{ lat3 }}
-      var lng40 = {{ lng4 }}
-      var lat40 = {{ lat4 }}
-      console.log(lng00)
-      console.log(lat00)
-      console.log(lng10)
-      console.log(lat10)
-      console.log(lng20)
-      console.log(lat20)
-      console.log(lng30)
-      console.log(lat30)
-      console.log(lng40)
-      console.log(lat40)
-      
+        //<script type = "text/javascript">
+            
+
+              //var lng00 = {{ lng0 }};
+              //var lat00 = {{ lat0 }};                            
+              //var lng10 = {{ lng1 }}
+              //var lat10 = {{ lat1 }}
+              //var lng20 = {{ lng2 }}
+              //var lat20 = {{ lat2 }}
+              //var lng30 = {{ lng3 }}
+              //var lat30 = {{ lat3 }}
+              //var lng40 = {{ lng4 }}
+              //var lat40 = {{ lat4 }}   
+              
+              
+              var centers = {{ latlong }}
+              var lng00 = centers[0]
+              var lat00 = centers[1]
+
+            
+ 
 
       mapboxgl.accessToken = 'pk.eyJ1IjoicGt1bmR1MjUiLCJhIjoiY2xoaWwwNDBrMDFyaDNrcGNvMmhrZXlsaCJ9.sOxWZOMT9vWN-YyhQm4cwg';
       const map = new mapboxgl.Map({
@@ -80,6 +80,7 @@
         .setLngLat([lng00, lat00]) // Marker [lng, lat] coordinates
         .addTo(map); // Add the marker to the map
       console.log("2")
+      if (0) {
       const marker1 = new mapboxgl.Marker() // Initialize a new marker
         .setLngLat([lng10, lat10]) // Marker [lng, lat] coordinates
         .addTo(map); // Add the marker to the map
@@ -95,6 +96,7 @@
       const marker4 = new mapboxgl.Marker() // Initialize a new marker
         .setLngLat([lng40, lat40]) // Marker [lng, lat] coordinates
         .addTo(map); // Add the marker to the map
+      }
 
       
       console.log("6")

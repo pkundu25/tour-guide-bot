@@ -139,8 +139,6 @@ nlu:
     - [Goa] (location) nearby locations
     - Tell me places closer to [Goa](location)
     - Can you tell me places nearby [Goa](location)     
-- intent: poi_around_me
-  examples: |
     - what are [beaches](poi) around [Goa](location)
     - Name the [beaches](poi) in close proximity of [Goa](location)
     - [beaches](poi) nearby [Goa] (location)

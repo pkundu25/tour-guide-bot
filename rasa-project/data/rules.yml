@@ -20,4 +20,18 @@ rules:
 - rule: Say greetings anytime the user says hey
   steps:
   - intent: greet
-  - action: action_greet_timeofday  
+  - action: action_greet_timeofday
+
+- rule: local search 1
+  steps:
+  #- intent: greet
+  #- action: utter_greet
+  #- action: action_greet_timeofday
+  - intent: places_around_me
+    entities: 
+      - location: "Goa"
+      - slot: {"location": "Goa"} 
+  #- action: utter_showing_places
+  - action: action_local_search
+
+  
