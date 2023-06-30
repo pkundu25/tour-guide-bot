@@ -29,7 +29,7 @@ def button_it(lists):
     except Exception as e:
         logger.exception(e)
 
-
+'''
 def hour_min_etc(time):
     time = time.split("-")[-1]
     try:
@@ -143,8 +143,25 @@ def get_recommendation():
     tell += "<br> Do you want to change the timings of any of your regular nursing rounds?"
 
     return tell
+'''    
 
-def LocalSearch(search, place_type):
+def Weather(city):
+    API_key = "e77820355cbac076ad2f89e8bb738ca5"    #"Your API Key here"
+    base_url = "http://api.openweathermap.org/data/2.5/weather?"
+    #base_url = "https://api.openweathermap.org/data/2.5/weather?id=524901&appid=API_KEY"
+    #base_url = "https://api.openweathermap.org/data/2.5/weather?id=524901"
+    #base_url = "https://api.openweathermap.org/data/2.5/weather?id=524901"
+    
+    Final_url = base_url + "appid=" + API_key + "&q=" + city + "&units=metric"
+    weather_data = requests.get(Final_url).json()
+    print("_________________")
+    print(Final_url)
+    print(weather_data)
+    print("_________________")
+    
+    return weather_data['main']
+
+def LocalSearch(search, city, place_type):
       access_token = "pk.eyJ1IjoicGt1bmR1MjUiLCJhIjoiY2xoaWwwNDBrMDFyaDNrcGNvMmhrZXlsaCJ9.sOxWZOMT9vWN-YyhQm4cwg"
       # Search text could be "city" or "place" if place_type="place" or it could be "beach", "hotel", "hospital" etc. if place_type="poi" (point of interest)
       # `proximity` is set to the coordinates of the campus
@@ -154,7 +171,7 @@ def LocalSearch(search, place_type):
       #Final_url = "https://api.mapbox.com/geocoding/v5/mapbox.places/" + city + ".json" + "?proximity=ip" + "&access_token=" + access_token
       url = "https://api.mapbox.com/geocoding/v5/mapbox.places/" + search + ".json?limit=10&country=in&proximity=ip&types="+ place_type + "&access_token=" + access_token      
           
-      print(url)
+      #print(url)
       local_search_data = requests.get(url).json()
       features = local_search_data['features']
       print(features)
@@ -165,11 +182,13 @@ def LocalSearch(search, place_type):
 
       
       # Defining a list of center coordinates
-
+      city = city.lower()
       center_list = []
       for i in features:
-            if i['center']:
-                center_list.append(i['center'])       
+            place_name = i['place_name'].lower()
+            if place_name.find(city) != -1:
+                center_list.append(i['center'])
+      print("_____________________")                       
       print(center_list)        
       return center_list
       
@@ -184,6 +203,7 @@ if __name__ == "__main__":
   #LocalSearch('Pune')
   #child()
   #print(wind_mph)
-  
-  app.run(debug=True, port = 8001)
-'''  
+  LocalSearch('gas station around goa', "Goa", "poi")
+  #app.run(debug=True, port = 8001)
+ 
+'''

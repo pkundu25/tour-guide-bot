@@ -5,7 +5,7 @@ rules:
 - rule: Say goodbye anytime the user says goodbye
   steps:
   - intent: goodbye
-  - action: utter_goodbye
+  - action: action_goodbye
 
 - rule: Say 'I am a bot' anytime the user challenges
   steps:
@@ -15,23 +15,30 @@ rules:
 - rule: Say welcome anytime the user says thanks
   steps:
   - intent: thanks
-  - action: utter_welcome  
+  - action: action_welcome  
 
 - rule: Say greetings anytime the user says hey
   steps:
   - intent: greet
   - action: action_greet_timeofday
 
-- rule: local search 1
-  steps:
+#- rule: Invalid city found
+  #condition:
+  #- slot_was_set:
+    #- city_found: false
+  #steps:  
+  #- action: utter_invalid_city_found 
+
+#- rule: local search 1
+  #steps:
   #- intent: greet
   #- action: utter_greet
   #- action: action_greet_timeofday
-  - intent: places_around_me
-    entities: 
-      - location: "Goa"
-      - slot: {"location": "Goa"} 
+  #- intent: places_around_me
+    #entities: 
+      #- location: "Goa"
+      #- slot: {"location": "Goa"} 
   #- action: utter_showing_places
-  - action: action_local_search
+  #- action: action_local_search
 
   

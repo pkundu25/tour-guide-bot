@@ -28,6 +28,8 @@ from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet, FollowupAction
 #from weather import Weather
 from utils.helper import LocalSearch
+from utils.helper import Weather
+
 
 
 logging.basicConfig(level=logging.DEBUG)
@@ -78,22 +80,44 @@ class ActionUtterGreet(Action):
         return []    
 '''    
 
-'''
-class ActionHelloWorld(Action):
+
+class ActionMenu(Action):
 
     def name(self) -> Text:
-        return "action_weather"
+        return "action_menu"
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        city = tracker.get_slot('location')
-        temperature=Weather(city)['temp']
-        response = "The current temperature at {} is {} degree Celsius.".format(city,temperature)
-        dispatcher.utter_message(response)
+        print("inside action menu")        
+        dispatcher.utter_message(template="utter_show_menu")
+        return [SlotSet('LOC', None), SlotSet('GPE', None), SlotSet('location', None), SlotSet('poi', None)]
+        #return []
 
-        return [SlotSet('location',city)]
-'''  
+class ActionWeome(Action):
+
+    def name(self) -> Text:
+        return "action_welcome"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        #print("inside action menu")        
+        dispatcher.utter_message(template="utter_welcome")
+        return [SlotSet('LOC', None), SlotSet('GPE', None), SlotSet('location', None), SlotSet('poi', None)]
+
+class ActionGoodbye(Action):
+
+    def name(self) -> Text:
+        return "action_goodbye"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        #print("inside action menu")        
+        dispatcher.utter_message(template="utter_goodbye")
+        return [SlotSet('LOC', None), SlotSet('GPE', None), SlotSet('location', None), SlotSet('poi', None)]                
+  
 
 class ActionGoodMorning(Action):
 
@@ -107,20 +131,21 @@ class ActionGoodMorning(Action):
         now = datetime.now()
         hour = int(now.strftime('%H'))
         if(hour>=0 and hour<12):
-            response = "Hi! Good Morning"
+            response = "Hi! Good Morning\n"
             #print("Hi! Good Morning")
         elif(hour>=12 and hour<=17):
-            response = "Hi! Good Afternoon"
+            response = "Hi! Good Afternoon\n"
             #print("Hi! Good Afternoon")
         if (hour>=17 and hour<24):
-            response = "Hi! Good Evening"
+            response = "Hi! Good Evening\n"
             #print("Hi! Good Evening")            
         
         dispatcher.utter_message(text=response)
+        dispatcher.utter_message(template="utter_show_menu")
         return []    
-        #return [FollowupAction(name = "action_weather")]
+        #return [FollowupAction(name = "action_menu")]
 
-'''
+
 class ActionCheckWeather(Action):
 
     def name(self) -> Text:
@@ -130,27 +155,38 @@ class ActionCheckWeather(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         
-        city = tracker.get_slot('location')
-        temperature = Weather(city)['temp']
-        #humidity = Weather(city)['humidity']
-        #wind_mph = Weather(city)['speed']
+        city = tracker.get_slot('GPE')
+        if city is None:
+            city = tracker.get_slot('LOC')
+        if city is None:
+            city = tracker.get_slot('location')              
 
-        response = "The current temperature at {} is {} degree Celsius.".format(city, temperature)
+        if city:
+
+            temperature = Weather(city)['temp']
+            #humidity = Weather(city)['humidity']
+            #wind_mph = Weather(city)['speed']
+
+            response = "The current temperature at {} is {} degree Celsius.".format(city, temperature)
+            
+            if (temperature > 27):
+                response+= " \nOutside is hot.\n"
+            else:
+                response+= " \nOutside is cold.\n"
+                        
+
+            dispatcher.utter_message(response)        
+
+            #return [SlotSet('location', city)]
         
-        if (temperature > 27):
-            response+= " Outside is hot"
+            #return [FollowupAction(name: "action_weather_humidity", timestamp: Optional[float] = None)]
+            return [FollowupAction(name = "action_weather_humidity")]
         else:
-            response+= " Outside is cold"
-                    
-
-        dispatcher.utter_message(response)        
-
-        #return [SlotSet('location', city)]
-    
-        #return [FollowupAction(name: "action_weather_humidity", timestamp: Optional[float] = None)]
-        return [FollowupAction(name = "action_weather_humidity")]
-    
-
+            dispatcher.utter_message(template="utter_invalid_city_found")
+            return [FollowupAction(name = "action_menu")]
+        #return []
+        
+   
 class ActionCheckHumidity(Action):
 
     def name(self) -> Text:
@@ -160,17 +196,34 @@ class ActionCheckHumidity(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         
-        city = tracker.get_slot('location')
-        #temperature = Weather(city)['temp']
+        city = tracker.get_slot('GPE')
+
+        if city is None:
+            city = tracker.get_slot('LOC')
+        if city is None:
+            city = tracker.get_slot('location')             
+
+        #city = city.lower() 
+        #city_found = (city == "goa")
+        #if city_found == True:
+
+            #temperature = Weather(city)['temp']
         humidity = Weather(city)['humidity']
         #wind_mph = Weather[]'wind']['speed']
 
-        response = "The current humidity at {} is {} %.".format(city, humidity)
+        response = "\nThe current humidity at {} is {} %.".format(city, humidity)
         dispatcher.utter_message(response)
+        #dispatcher.utter_message(template="utter_flow_complete", flow = "1")
 
-        return [SlotSet('location', None)]  
-    
-'''
+        return [SlotSet('GPE', None), FollowupAction(name = "action_menu")]
+        #return [FollowupAction(name = "action_menu")]
+        #else:
+             #dispatcher.utter_message(template="utter_invalid_city_found")
+
+        #return [SlotSet('city_found', city_found)]             
+
+ 
+
 
 '''
 app = Flask(__name__)
@@ -188,85 +241,101 @@ class ActionSearchPlaces(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         
-        city = tracker.get_slot('location')
+        city = tracker.get_slot('GPE')
+        if city is None:
+            city = tracker.get_slot('LOC')
+        if city is None:
+            city = tracker.get_slot('location')             
 
-        poi = tracker.get_slot('poi')
-        #poi = "beaches"
-        #print(poi)
+        if city:
+
+            poi = tracker.get_slot('poi')
+            #poi = "beaches"
+            #print(poi)
+            
+            if poi == None:        
+                search1 = "place" + " around " + city
+                # features is a list  that contains centers (having list of values) around the search place
+                centers =  LocalSearch(search1, city, "place")
         
-        if poi == None:        
-            search1 = "place" + " around " + city
-            # features is a list  that contains centers (having list of values) around the search place
-            centers =  LocalSearch(search1, "place")
+                #center_list = [i['center'] for i in features]
+                '''
+                center_list = []
+                
+                for i in features:
+                    d = []
+                    d['center'] = i['center']
+                    center_list.append(d['center'])
+                '''            
+            else:
+                search = poi + " around " + city
+                centers =  LocalSearch(search, city, "poi")
+
+                #(center, bbox)  = LocalSearch(city)
+                #center_list = []    
+                # center_list is a list if lists (each having 2 values)
+            if len(centers) < 5:
+                center0 = centers[0]                
+
+                lng0 = center0[0]
+                lat0 = center0[1]
+                lng1 = None
+                lat1 = None
+                lng2 = None
+                lat2 = None
+                lng3 = None
+                lat3 = None
+                lng4 = None
+                lat4 = None       
+                
+            else:     
+                center0 = centers[0]
+                center1 = centers[1] 
+                center2 = centers[2] 
+                center3 = centers[3] 
+                center4 = centers[4]                     
+
+                lng0 = center0[0]
+                lat0 = center0[1]
+                lng1 = center1[0]
+                lat1 = center1[1]
+                lng2 = center2[0]
+                lat2 = center2[1]
+                lng3 = center3[0]
+                lat3 = center3[1]
+                lng4 = center4[0]
+                lat4 = center4[1]
+
+                #response = "You can find the places in the map at {}, {}.".format(lng,lat)
+                #dispatcher.utter_message(response)
+
+            dispatcher.utter_message(
+                template ="utter_user_details",            
+                lng0 = lng0,
+                lat0 = lat0,
+                lng1 = lng1,
+                lat1 = lat1,
+                lng2 = lng2,
+                lat2 = lat2,
+                lng3 = lng3,
+                lat3 = lat3,
+                lng4 = lng4,
+                lat4 = lat4,
+                city = city            
+            )                    
+
+            #return [SlotSet('location', None)] 
+            #return []
     
-            #center_list = [i['center'] for i in features]
-            '''
-            center_list = []
-            
-            for i in features:
-                d = []
-                d['center'] = i['center']
-                center_list.append(d['center'])
-            '''            
         else:
-            search = poi + " around " + city
-            centers =  LocalSearch(search, "poi")
+            dispatcher.utter_message(template="utter_invalid_city_found")
+            #return [FollowupAction(name = "action_menu")]
+            #return [SlotSet(city_found, False)] 
+        #return [SlotSet('city_found', city_found)]
+        #dispatcher.utter_message(template="utter_show_menu")
+        #return [SlotSet('LOC', None), SlotSet('GPE', None), SlotSet('poi', None), FollowupAction(name = "action_menu")]
+        return [FollowupAction(name = "action_menu")]
 
-            #(center, bbox)  = LocalSearch(city)
-            #center_list = []    
-            # center_list is a list if lists (each having 2 values)
-        if len(centers) < 5:
-            center0 = centers[0]                
-
-            lng0 = center0[0]
-            lat0 = center0[1]
-            lng1 = None
-            lat1 = None
-            lng2 = None
-            lat2 = None
-            lng3 = None
-            lat3 = None
-            lng4 = None
-            lat4 = None       
-            
-        else:     
-            center0 = centers[0]
-            center1 = centers[1] 
-            center2 = centers[2] 
-            center3 = centers[3] 
-            center4 = centers[4]                     
-
-            lng0 = center0[0]
-            lat0 = center0[1]
-            lng1 = center1[0]
-            lat1 = center1[1]
-            lng2 = center2[0]
-            lat2 = center2[1]
-            lng3 = center3[0]
-            lat3 = center3[1]
-            lng4 = center4[0]
-            lat4 = center4[1]
-
-            #response = "You can find the places in the map at {}, {}.".format(lng,lat)
-            #dispatcher.utter_message(response)
-
-        dispatcher.utter_message(
-            template ="utter_user_details",            
-            lng0 = lng0,
-            lat0 = lat0,
-            lng1 = lng1,
-            lat1 = lat1,
-            lng2 = lng2,
-            lat2 = lat2,
-            lng3 = lng3,
-            lat3 = lat3,
-            lng4 = lng4,
-            lat4 = lat4,
-            city = city            
-        )                    
-
-        #return [SlotSet('location', None)]   
-        return []
 
 '''
 class ActionSearchPoi(Action):

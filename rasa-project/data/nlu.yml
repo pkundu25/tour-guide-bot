@@ -95,92 +95,164 @@ nlu:
     - hows the weather today
 - intent: weather_for_location
   examples: |
-    - what is the weather in [Noida](location)
-    - what is the weather in [New Delhi](location)
-    - weather of [Mumbai] (location)
-    - Today's weather in [Bangalore](location)
-    - [Kolkata] (location) weather
-    - Tell me weather of [Hyderabad](location)
-    - Can you tell me weather of [London](location)    
+    - what is the weather in 
+    - what is the weather in New Delhi
+    - weather of 
+    - Today's weather in 
+    -  weather
+    - Tell me weather of 
+    - Can you tell me weather of     
 - intent: city_info
   examples: |
     - [Goa](location)
-    - [India](location)
-    - [Mumbai](location)
-    - [Noida](location)
-    - [Kolkata](location)
-    - [Bangalore](location)
-    - [London](location)
+    - [goa](location)
+    - [Mumbai](GPE)
+    - [mumbai](GPE)
+    - [Delhi](GPE)
+    - [delhi](GPE)
+    - [Pune](location)
+    - [pune](location)
+    - [Chennai](location)
+    - [chennai](location)
 - intent: weather_humidity
   examples: |
-    - what is the humidity in [Noida](location)
-    - what is the humidity in [New Delhi](location)
-    - humidity of [Mumbai] (location)
-    - Today's humidity in [Bangalore](location)
-    - [Kolkata] (location) humidity
-    - Tell me humidity of [Hyderabad](location)
-    - Can you tell me humidity of [London](location)        
+    - what is the humidity in [Goa](location)
+    - what is the humidity in [Goa](location)
+    - humidity of [Goa](location)
+    - Today's humidity in [Goa](location)
+    - [Goa](location) humidity
+    - Tell me humidity of [Goa](location)
+    - Can you tell me humidity of [Goa](location)        
 - intent: thanks
   examples: |
     - thanks
     - thank you
-    - OK
+    - OK thanks
     - Thanks
     - many thanks
     - thanks a lot
     - thank you so much
     - thank u very much
-- intent: places_around_me
+- intent: places_around_city
   examples: |
-    - what are places around [Goa](location)
+    - what are places around [Goa](GPE)
     - Name the places in close proximity of [Goa](location)
-    - places nearby [Goa] (location)
+    - places nearby [Goa](location)
     - i want to know places in and around [Goa](location)
-    - [Goa] (location) nearby locations
     - Tell me places closer to [Goa](location)
     - Can you tell me places nearby [Goa](location)     
-    - what are [beaches](poi) around [Goa](location)
-    - Name the [beaches](poi) in close proximity of [Goa](location)
-    - [beaches](poi) nearby [Goa] (location)
-    - i want to know [beaches](poi) in and around [Goa](location)
-    - [Goa] (location) nearby [beaches[(poi)
-    - Tell me [beaches](poi) closer to [Goa](location)
-    - Can you tell me [beaches](poi) nearby [Goa](location)  
-    - what are [hotels](poi) around [Goa](location)
-    - Name the [hotels](poi) in close proximity of [Goa](location)
-    - [hotels](poi) nearby [Goa] (location)
-    - i want to know [hotels](poi) in and around [Goa](location)
-    - [Goa] (location) nearby [hotels](poi)
-    - Tell me [hotels](poi) closer to [Goa](location)
+    - what are [beach](poi) around [Goa](location) 
+    - Name the [beach](poi) in close proximity of [Goa](location)
+    - [beach](poi) nearby [Goa](location)
+    - i want to know [beach](poi) in and around [Goa](location)
+    - [Goa](location) nearby [beach](poi)
+    - Tell me [beach](poi) closer to [Goa](location) 
+    - Can you tell me [beach](poi) nearby [Goa](location)   
+    - what are [hotels](poi) around [Goa](location) 
+    - Name the [hotels](poi) in close proximity of [Goa](location) 
+    - [hotels](poi) nearby [Goa](location) 
+    - i want to know [hotels](poi) in and around [Goa](location) 
+    - [Goa](location) nearby [hotels](poi)
+    - Tell me [hotels](poi) closer to [Goa](location) 
+    - show me [hotels](poi) around [Goa](location)
     - Can you tell me [hotels](poi) nearby [Goa](location)
     - what are [restaurants](poi) around [Goa](location)
     - Name the [restaurants](poi) in close proximity of [Goa](location)
-    - [restaurants](poi) nearby [Goa] (location)
+    - [restaurants](poi) nearby [Goa](location)
     - i want to know [restaurants](poi) in and around [Goa](location)
-    - [Goa] (location) nearby [restaurants](poi)
-    - Tell me [restaurants](poi) closer to [Goa](location)
-    - Can you tell me [restaurants](poi) nearby [Goa](location) 
+    - [Goa](location) nearby [restaurants](poi)
+    - Tell me [restaurants](poi) closer to [Goa](location) 
+    - show me [restaurants](poi) around [Goa](location) 
+    - Can you tell me [restaurants](poi) nearby [Goa](location)  
     - what are [hospitals](poi) around [Goa](location)
     - Name the [hospitals](poi) in close proximity of [Goa](location)
-    - [hospitals](poi) nearby [Goa] (location)
+    - [hospitals](poi) nearby [Goa](location) 
     - i want to know [hospitals](poi) in and around [Goa](location)
-    - [Goa] (location) nearby [hospitals](poi)
-    - Tell me [hospitals](poi) closer to [Goa](location)
-    - Can you tell me [hospitals](poi) nearby [Goa](location)
+    - [Goa](location) nearby [hospitals](poi) [Goa](location)
+    - Tell me [hospitals](poi) closer to [Goa](location) 
+    - show me [hospitals](poi) around [Goa](location)
+    - Can you tell me [hospitals](poi) nearby [Goa](location) 
     - what are [petrol pumps](poi) around [Goa](location)
-    - Name the [petrol pumps](poi) in close proximity of [Goa](location)
-    - [petrol pumps](poi) nearby [Goa] (location)
+    - Name the [petrol pumps](poi) in close proximity of [Goa](location) 
+    - [petrol pumps](poi) nearby [Goa](location) 
     - i want to know [petrol pumps](poi) in and around [Goa](location)
-    - [Goa] (location) nearby [petrol pumps](poi)
+    - [Goa](location) nearby [petrol pumps](poi)
     - Tell me [petrol pumps](poi) closer to [Goa](location)
-    - Can you tell me [petrol pumps](poi) nearby [Goa](location)
-    - what are [atms](poi) around [Goa](location)
-    - Name the [atms](poi) in close proximity of [Goa](location)
-    - [atms](poi) nearby [Goa] (location)
-    - i want to know [atms](poi) in and around [Goa](location)
-    - [Goa] (location) nearby [atms](poi)
-    - Tell me [atms](poi) closer to [Goa](location)
-    - Can you tell me [atms](poi) nearby [Goa](location)
+    - show me [gas stations](poi) around [Goa](location)
+    - Can you tell me [petrol pumps](poi) nearby [Goa](location) 
+    - what are [bank atms](poi) around [Goa](location) 
+    - Name the [bank atms](poi) in close proximity of [Goa](location) 
+    - [bank atms](poi) nearby [Goa](location)
+    - i want to know [bank atms](poi) in and around [Goa](location) 
+    - [Goa](location) nearby [bank atms](poi)
+    - Tell me [bank atms](poi) closer to [Goa](location) 
+    - show me [bank atms](poi) around [Goa](location) 
+    - Can you tell me [gas stations](poi) nearby [Goa](location) 
+    - what are [gas stations](poi) around [Goa](location) 
+    - Name the [gas stations](poi) in close proximity of [Goa](location) 
+    - [gas stations](poi) nearby [Goa](location)
+    - i want to know [gas stations](poi) in and around [Goa](location)
+    - [Goa](location) nearby [gas stations](poi)
+    - Tell me [gas stations](poi) closer to [Goa](location)
+    - Can you tell me [gas stations](poi) nearby [Goa](location)
+- intent: places_around_me
+  examples: |
+    - what are places around me
+    - Name the places in close proximity of me
+    - places nearby me
+    - i want to know places in and around me
+    - Tell me places closer to me
+    - Can you tell me places nearby me     
+    - what are [beach](poi) around me
+    - Name the [beach](poi) in close proximity of me
+    - [beach](poi) nearby me
+    - i want to know [beach](poi) in and around me
+    - me nearby [beach](poi)
+    - Tell me [beach](poi) closer to me
+    - Can you tell me [beach](poi) nearby me  
+    - what are [hotels](poi) around me
+    - Name the [hotels](poi) in close proximity of me
+    - [hotels](poi) nearby me
+    - i want to know [hotels](poi) in and around me
+    - me nearby [hotels](poi)
+    - Tell me [hotels](poi) closer to me
+    - Can you tell me [hotels](poi) nearby me
+    - what are [restaurants](poi) around me
+    - Name the [restaurants](poi) in close proximity of me
+    - [restaurants](poi) nearby me
+    - i want to know [restaurants](poi) in and around me
+    - me nearby [restaurants](poi)
+    - Tell me [restaurants](poi) closer to me
+    - Can you tell me [restaurants](poi) nearby me 
+    - what are [hospitals](poi) around me
+    - Name the [hospitals](poi) in close proximity of me
+    - [hospitals](poi) nearby me
+    - i want to know [hospitals](poi) in and around me
+    - me nearby [hospitals](poi)
+    - Tell me [hospitals](poi) closer to me
+    - Can you tell me [hospitals](poi) nearby me
+    - what are [petrol pumps](poi) around me
+    - Name the [petrol pumps](poi) in close proximity of me
+    - [petrol pumps](poi) nearby me
+    - i want to know [petrol pumps](poi) in and around me
+    - me nearby [petrol pumps](poi)
+    - Tell me [petrol pumps](poi) closer to me
+    - Can you tell me [petrol pumps](poi) nearby me
+    - what are [bank atms](poi) around me
+    - Name the [bank atms](poi) in close proximity of me
+    - [bank atms](poi) nearby me
+    - i want to know [bank atms](poi) in and around me
+    - me nearby [bank atms](poi)
+    - Tell me [bank atms](poi) closer to me
+    - Can you tell me [gas stations](poi) nearby me
+    - what are [gas stations](poi) around me
+    - Name the [gas stations](poi) in close proximity of me
+    - [gas stations](poi) nearby me
+    - i want to know [gas stations](poi) in and around me
+    - me nearby [gas stations](poi)
+    - Tell me [gas stations](poi) closer to me
+    - Can you tell me [gas stations](poi) nearby me
+         
           
 
 

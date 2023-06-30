@@ -18,9 +18,10 @@ intents:
 - weather_humidity
 - city_info
 - places_around_me
+- places_around_city
 - thanks
 entities:
-- location
+#- location
 - name
 - lng0
 - lat0
@@ -33,13 +34,24 @@ entities:
 - lng4
 - lat4
 - poi
+- GPE
+- LOC
+- location
 slots:
-  location:
+  GPE:
+    type: text
+    influence_conversation: true
+  LOC:
     type: text
     influence_conversation: true
   poi:
     type: text
+    influence_conversation: true  
+  location:
+    type: text
     influence_conversation: true    
+  #city_found:
+    #type: bool        
 responses:
   utter_greet:
   - text: Hey! How are you?
@@ -54,6 +66,7 @@ responses:
     image: https://i.imgur.com/nGF1K8f.jpg
   utter_did_that_help:
   - text: Did that help you?
+  - text: Hope this helps
   utter_happy:
   - text: Great, carry on!
   utter_goodbye:
@@ -62,12 +75,23 @@ responses:
   - text: of where?
   - text: In what city?
   utter_getting_weather:
-  - text: Ok, getting weather of [location] ...
-  #utter_showing_places:
+  #- text: Ok, getting weather of [location] ...
+  - text: Ok, getting weather of [Mumbai] ...
+  - text: Ok, getting weather of [Delhi] ...
+  - text: Ok, getting weather of [Goa] ...
+  utter_showing_places:
   #- text: Ok, showing places around [location] ...
+  - text: Ok, showing places around Goa ...
+  - text: Ok, showing beaches around Goa ...
+  - text: Ok, showing hotels around Goa ...
+  - text: Ok, showing restaurants around Goa ...
+  - text: Ok, showing hospitals around Goa ...
+  - text: Ok, showing petrol pumps around Goa ...
+  - text: Ok, showing ATMs around Goa ...
   utter_welcome:
   - text: Welcome
   - text: welcome
+  - text: wc
   utter_iamabot:
   - text: I am a bot, powered by Rasa.
   #utter_user_details:
@@ -78,7 +102,7 @@ responses:
   utter_user_details:
   - custom:
       blocks:
-        city: "{location}"
+        city: "{GPE}"
         center: 
           lng0: "{lng0}"
           lat0: "{lat0}"    
@@ -89,7 +113,21 @@ responses:
           lng3: "{lng3}"
           lat3: "{lat3}" 
           lng4: "{lng4}"
-          lat4: "{lat4}"  
+          lat4: "{lat4}"
+  utter_invalid_city_found:
+  - text: invalid city
+  - text: this is not a valid city
+  - text: city you mentioned is not a valid city
+  - text: please enter a valid city after reset
+
+  utter_show_menu:
+  - text: Please ask me about 'Weather' or 'Local search'
+  - text: You can ask me about 'Weather' or 'Local search'
+
+  utter_flow_complete:
+  - custom: 
+      blocks:
+        flow: "1"           
    
 actions:
 #- action_PN_2_save_name
@@ -99,8 +137,11 @@ actions:
 #- utter_iamabot
 #- utter_intro
 #- utter_ask_location
-#- action_weather
+- action_weather
 - action_greet_timeofday
-#- action_weather_humidity
+- action_weather_humidity
 - action_local_search
-#- action_local_search_poi
+- action_menu
+- action_welcome
+- action_goodbye
+

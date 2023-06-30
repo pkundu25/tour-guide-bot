@@ -13,78 +13,121 @@ stories:
 
 #- story: sad path 1
   #steps:
-#   - intent: greet
-#   - action: utter_greet
-#   - intent: get_started
-#   - action: utter_intro
-#   - intent: mood_unhappy
-#   - action: utter_cheer_up
-#   - intent: mood_unhappy
-#   - action: utter_did_that_help
-#   - intent: affirm
-#   - action: utter_happy
+  #- intent: greet
+  #- action: utter_greet
+  #- intent: get_started
+  #- action: utter_intro
+  #- intent: mood_unhappy
+  #- action: utter_cheer_up
+  #- intent: mood_unhappy
+  #- action: utter_did_that_help
+  #- intent: affirm
+  #- action: utter_happy
 
-# - story: sad path 2
-#   steps:
-#   - intent: greet
-#   - action: utter_greet
-#   - intent: mood_unhappy
-#   - action: utter_cheer_up
-#   - intent: mood_unhappy
-#   - action: utter_did_that_help
-#   - intent: deny
-#   - action: utter_goodbye
+#- story: sad path 2
+  #steps:
+  #- intent: greet
+  #- action: utter_greet
+  #- intent: mood_unhappy
+  #- action: utter_cheer_up
+  #- intent: mood_unhappy
+  #- action: utter_did_that_help
+  #- intent: deny
+  #- action: utter_goodbye
+
+#- story: menu options
+  #steps:
+  #- action: utter_show_menu  
+  #- action: action_menu
 
 # # Stories for weather added here
-#- story: weather 1
-  #steps:
+- story: weather 1
+  steps:
   #- intent: greet  
   #- action: utter_greet
   #- action: action_greet_timeofday
-  #- intent: weather
-  #- action: utter_ask_location
-  #- intent: city_info 
+  - intent: weather
+    #- slot_was_set:
+      #- GPE: null  
+  - action: utter_ask_location  
+  - intent: city_info 
     #entities: 
-      #- location: "Delhi"
-      #- slot: {"location": "Delhi"} 
-  #- action: action_weather
+      #- GPE: "Goa"
+      #- slot: {"GPE": "Goa"} 
+  - action: action_weather
   #- slot_was_set:
     #- my_slot: null  
-  #- intent: weather_humidity
-  #- action: action_weather_humidity
+  - intent: weather_humidity
+  - action: action_weather_humidity
   #- intent: thanks
   #- action: utter_welcome
 
 #- story: weather 2
   #steps:
+  #- intent: greet  
+  #- action: utter_greet
+  #- action: action_greet_timeofday
+  #- intent: weather
+  #- slot_was_set:
+    #- location: null  
+  #- action: utter_ask_location  
+  #- intent: city_info
+  #- slot_was_set:
+    #- location: null
+  #- action: utter_invalid_city_found       
+  
+
+- story: weather 3
+  steps:
   #- intent: greet
   #- action: utter_greet
   #- action: action_greet_timeofday
-  #- intent: weather_for_location
+  - intent: weather_for_location
     #entities: 
-      #- location: "Mumbai"
-      #- slot: {"location": "Mumbai"} 
-  #- action: action_weather
+      #- GPE: "Goa"
+      #- slot: {"GPE": "Goa"} 
+  - action: action_weather
   #- slot_was_set:
     #- my_slot: null  
   #- intent: thanks
   #- action: utter_welcome  
 
-#- story: local search 1
-  #steps:
+- story: local search 1
+  steps:
   #- intent: greet
   #- action: utter_greet
   #- action: action_greet_timeofday
-  #- intent: places_around_me
+  - intent: places_around_city
     #entities: 
-      #- location: "Goa"
-      #- slot: {"location": "Goa"} 
+      #- GPE: "Goa"
+      #- slot: {"GPE": "Goa"} 
   #- action: utter_showing_places
-  #- action: action_local_search
+  - action: action_local_search
   #- slot_was_set:
     #- my_slot: null  
   #- intent: thanks
-  #- action: utter_welcome  
+  #- action: utter_welcome
+
+- story: local search 2
+  steps:
+  #- intent: greet
+  #- action: utter_greet
+  #- action: action_greet_timeofday
+  - intent: places_around_me
+    #- slot_was_set:
+      #- GPE: null  
+  - action: utter_ask_location
+  - intent: city_info
+    #entities: 
+      #- location: "Goa"
+      #- slot: {"GPE": "Goa"} 
+  #- action: utter_showing_places
+  - action: action_local_search
+  #- slot_was_set:
+    #- my_slot: null  
+  #- intent: thanks
+  #- action: utter_welcome
+          
 
 #- story: local search 2
   #steps:

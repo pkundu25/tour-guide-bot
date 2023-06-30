@@ -11,7 +11,7 @@ import time
 sender = randint(1000, 10000)
 app = Flask(__name__, template_folder='templates')
 #app = Flask(__name__)
-
+@app.route("/restart_session")
 def restart_session():
     global sender
     sender = randint(10000, 100000)
@@ -22,7 +22,7 @@ def restart_session():
 
 @app.route("/")
 def home():
-    return render_template("diginurse_index.html")
+    return render_template("tourmate_index.html")
 
 @app.route("/get")
 def get_bot_response():
@@ -56,6 +56,9 @@ def get_bot_response():
 
 
         city = loc['city']
+        print("==========================")
+        print(L)
+        print("==========================")
 
         return render_template("index1.html", latlong = L)
 

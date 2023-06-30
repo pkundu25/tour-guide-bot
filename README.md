@@ -59,6 +59,9 @@ you will be able to see the chatbot icon visible on right bottom corner of the w
 
 Click to open and you are ready to start conversing with your TourBot.
 
+5) Please make sure you restart the chat session by clicking on 'Reset' link (seen on the left side of the web page) 
+every time you to want ask either 'Weather' or 'Local search' related queries.
+
 ## Viewing the chat logs:
 
 All the conversations between the user and the bot are captured and stored into user-chatDB inside rasa-project.
@@ -74,6 +77,8 @@ You can view the session-wise conversations between the user and the bot with ti
 Just choose user and bot against the column 'type_name' to view the text under 'data'.
  
 Further development is in progress and GitHub will be updated accordingly. 
+
+For any issues or suggestions, please feel free to write to: pkundu25@gmail.com
 
 ### References:
 1. https://rasa.com/docs/rasa/user-guide/installation/ 

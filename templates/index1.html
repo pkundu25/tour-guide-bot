@@ -62,12 +62,19 @@
               var centers = {{ latlong }}
               var lng00 = centers[0]
               var lat00 = centers[1]
+              console.log(lng00)
+              console.log(lat00)
+              console.log(centers.length)
 
             
  
 
       mapboxgl.accessToken = 'pk.eyJ1IjoicGt1bmR1MjUiLCJhIjoiY2xoaWwwNDBrMDFyaDNrcGNvMmhrZXlsaCJ9.sOxWZOMT9vWN-YyhQm4cwg';
-      const map = new mapboxgl.Map({
+      mapboxgl.setRTLTextPlugin(
+            'https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js'
+      );
+      console.log("0")          
+      const myMap = new mapboxgl.Map({
         container: 'map', // Container ID
         style: 'mapbox://styles/mapbox/streets-v12', // Map style to use
         //center: [-122.25948, 37.87221], // Starting position [lng, lat]
@@ -78,24 +85,30 @@
       console.log("1")
       const marker0 = new mapboxgl.Marker() // Initialize a new marker
         .setLngLat([lng00, lat00]) // Marker [lng, lat] coordinates
-        .addTo(map); // Add the marker to the map
+        .addTo(myMap); // Add the marker to the myMap
       console.log("2")
-      if (0) {
+      if (4 <= centers.length) {
       const marker1 = new mapboxgl.Marker() // Initialize a new marker
-        .setLngLat([lng10, lat10]) // Marker [lng, lat] coordinates
-        .addTo(map); // Add the marker to the map
+        .setLngLat([centers[2], centers[3]]) // Marker [lng, lat] coordinates
+        .addTo(myMap); // Add the marker to the myMap
       console.log("3")  
+      }
+      if (6<= centers.length) {
       const marker2 = new mapboxgl.Marker() // Initialize a new marker
-        .setLngLat([lng20, lat20]) // Marker [lng, lat] coordinates
-        .addTo(map); // Add the marker to the map
+        .setLngLat([centers[4], centers[5]]) // Marker [lng, lat] coordinates
+        .addTo(myMap); // Add the marker to the myMap
       console.log("4")
+      }
+      if (8 <= centers.length) {
       const marker3 = new mapboxgl.Marker() // Initialize a new marker
-        .setLngLat([lng30, lat30]) // Marker [lng, lat] coordinates
-        .addTo(map); // Add the marker to the map
+        .setLngLat([centers[6], centers[7]]) // Marker [lng, lat] coordinates
+        .addTo(myMap); // Add the marker to the myMap
       console.log("5")
+      }
+      if (10 <= centers.length) {
       const marker4 = new mapboxgl.Marker() // Initialize a new marker
-        .setLngLat([lng40, lat40]) // Marker [lng, lat] coordinates
-        .addTo(map); // Add the marker to the map
+        .setLngLat([centers[8], centers[9]]) // Marker [lng, lat] coordinates
+        .addTo(myMap); // Add the marker to the myMap
       }
 
       
@@ -114,13 +127,13 @@
         } // Coordinates of UC Berkeley
       });
 
-      // Add the geocoder to the map
-      map.addControl(geocoder);
+      // Add the geocoder to the myMap
+      myMap.addControl(geocoder);
       console.log("7")
       // After the map style has loaded on the page,
       // add a source layer and default styling for a single point
-      map.on('load', () => {
-        map.addSource('single-point', {
+      myMap.on('load', () => {
+        myMap.addSource('single-point', {
           'type': 'geojson',
           'data': {
             'type': 'FeatureCollection',
@@ -128,7 +141,7 @@
           }
         });
         console.log("8")
-        map.addLayer({
+        myMap.addLayer({
           'id': 'point',
           'source': 'single-point',
           'type': 'circle',
@@ -141,7 +154,7 @@
         // Listen for the `result` event from the Geocoder // `result` event is triggered when a user makes a selection
         //  Add a marker at the result's coordinates
         geocoder.on('result', (event) => {
-          map.getSource('single-point').setData(event.result.geometry);
+          myMap.getSource('single-point').setData(event.result.geometry);
         });
         console.log("10")
       });

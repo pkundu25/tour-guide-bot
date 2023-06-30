@@ -1,0 +1,288 @@
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+
+    <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"> -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='scss/s.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   <style>
+      iframe[iframetag] {
+         border: none;
+      }
+   </style>
+
+
+    <meta charset="utf-8" />
+    <title>Tourmate</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
+    <link
+      href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css"
+      type="text/css"
+    />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+    </style>
+
+    <style>
+      .btn btn-link{
+    height:20px;
+    width:20px;
+      }
+      .mr-0 {
+    margin-right: 0;
+      }
+      .mr-auto {
+    margin-left:auto;
+      }     
+    </style>
+
+  </head>
+  <body>
+    <div class="container">
+      <div class="widget">
+         <div class="chat_header">
+            <!--Add the name of the bot here -->
+            <span style="color:blue;margin-left: 5px;">Tourmate </span>
+            <span style="color:blue;margin-right: 5px;float:right;margin-top: 5px;" id="close">
+            <i class="material-icons">close</i>
+            </span>
+         </div>
+
+<!--    <div class="container">-->
+<!--      -->
+        <button type="button" class="btn btn-link mr-0 mr-auto" onclick="reStart();">Reset</button>
+<!--    <button type="button" class="btn btn-secondary" onclick="flow('new_treatment');">New Treatment</button>-->
+<!--    <button type="button" class="btn btn-success">Success</button>-->
+<!--    <button type="button" class="btn btn-danger">Danger</button>-->
+<!--    <button type="button" class="btn btn-warning">Warning</button>-->
+<!--    <button type="button" class="btn btn-info">Info</button>-->
+<!--    <button type="button" class="btn btn-light">Light</button>-->
+<!--    <button type="button" class="btn btn-dark">Dark</button>-->
+<!--    -->
+<!--    <button type="button" class="btn btn-link">Link</button>-->
+
+<!--    -->
+<!--    </div>-->
+<!--      <img onclick="toggle_visibility('chatWindow');" class="chat_button" src="{{ url_for('static',filename='imgs/chatbot.svg') }}"/>-->
+
+    <div id="includedContent">
+                </div>
+
+<!--     <div>-->
+<!--   <div id="iframeDiv">-->
+<!--      <iframe src="inner.html"  width="800" height="800" ></iframe>-->
+<!--   </div>-->
+
+      <div id="chatWindow">
+        <div id="chatbox">
+          <h1>Tourmate</h1>
+
+        </div>
+        <div id="chathistory">
+        </div>
+        <div id="userInput">
+          <input id="textInput" type="text" name="msg" placeholder="Type & Press Enter " required>
+          
+          <!-- <button id="buttonInput" onclick="reStart();" value="restart">End</button> -->
+        </div>
+      </div>
+      <script>
+
+          function sleep(milliseconds) {
+            const date = Date.now();
+            let currentDate = null;
+            do {
+              currentDate = Date.now();
+            } while (currentDate - date < milliseconds);
+          }
+
+          // function test_welcome(num){
+          //     var msg = "";
+          //     $.get("/welcome_messages", { number: num }).done(function(data) {
+          //       console.log("welcome message");
+          //       console.log(data);
+          //       msg = data;
+                
+          //   });
+          //   console.log("returning " + msg);
+          //   return msg;
+          // }
+
+          function flow(type_) {
+            reStart();
+            $("#chathistory").empty();
+            console.log("flow");
+            var m = ""
+            botTyping();
+            $("#chathistory").append(typing);
+            for (let i = 0; i <= 2; i++) {
+              
+              // sleep(500);
+              $.get("/welcome_messages", { number: i + 1, type:type_ }).done(function(data) {
+                console.log("welcome message");
+                console.log(data);
+                message = '<p class="botText"><span>' + data + '</span></p>'
+                $("#chathistory > .botTyping").remove();
+                $("#chathistory").append(message);
+
+                botTyping();
+                $("#chathistory").append(typing);
+
+                objDiv = document.getElementById("chathistory");
+                objDiv.scrollTop = objDiv.scrollHeight;
+
+                if (i == 2) {
+                  message = '<button class="botButtons" mapto="Yes" onclick="BotButtonClicked(this);">Yes</button>'
+                  message = message + '<button class="botButtons" mapto="No" onclick="BotButtonClicked(this);">No</button>'
+                  // Scroll to the bottom of the chatbox
+                  $("#chathistory > .botTyping").remove();
+                  $("#chathistory").append(message);
+                  objDiv = document.getElementById("chathistory");
+                  objDiv.scrollTop = objDiv.scrollHeight;
+                }
+            })
+                
+            }
+            // m1 = "Hello! Hemanth! Mr.Gupta has diagnosed you with MRI. Your Diginurse will be with you through out the treatment period overseeing your recovery."
+            // message = '<p class="botText"><span>' + m + '</span></p>'
+            // $("#chathistory").append(message);
+            // sleep(500);
+            // m2 = "During your treatment period I'll assist you with keep track of your medications, logging your vitals and symptoms and provide you with recommendations on your diet and lifestyle"
+            // message =  '<p class="botText"><span>' + m + '</span></p>'
+            
+            // $("#chathistory").append(message);
+            // m3 = "Are you ready to setup your personalized nursing plan? It’ll only take few minutes."
+            // message =  '<p class="botText"><span>' + m + '</span></p>'
+            // sleep(500);
+            // message = '<p class="botText"><span>' + message + '</span></p>'
+            // $("#chathistory").append(message);
+            // message = '<button class="botButtons" mapto="Yes" onclick="BotButtonClicked(this);">Yes</button>'
+            // message = message + '<button class="botButtons" mapto="No" onclick="BotButtonClicked(this);">No</button>'
+            // // Scroll to the bottom of the chatbox
+            // $("#chathistory").append(message);
+            // objDiv = document.getElementById("chathistory");
+            // objDiv.scrollTop = objDiv.scrollHeight;
+          }
+
+          // document.addEventListener("DOMContentLoaded", ready);
+        
+        function botTyping() {
+          typing = '<div class="botTyping"><span></span><span></span><span></span></div>';
+          return typing;
+        }
+
+        function getBotResponse() {
+          var rawText = $("#textInput").val();
+          var userHtml = '<p class="userText"><span>' + rawText + '</span></p>';
+          $("#textInput").val("");
+         
+          
+          if (rawText) {
+              $("#chathistory").append(userHtml);
+              // document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
+              typing =  botTyping();
+              $("#chathistory").append(typing);
+
+              console.log()
+              objDiv = document.getElementById("chathistory");
+              objDiv.scrollTop = objDiv.scrollHeight;
+
+              $.get("/get", { msg: rawText }).done(function(data) {
+              var botHtml = data;
+              console.log(botHtml)
+              $('#includedContent').html(botHtml);
+
+              sleep(500);
+              $("#chathistory > .botTyping").remove();
+              $("#chathistory").append(botHtml);
+
+              objDiv = document.getElementById("chathistory");
+              objDiv.scrollTop = objDiv.scrollHeight;
+              // document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
+            });
+          }
+          
+        }
+        $("#textInput").keypress(function(e) {
+            if(e.which == 13) {
+                
+                getBotResponse();
+            }
+        });
+        $("#buttonInput").click(function() {
+          
+          getBotResponse();
+        });
+
+        function reStart() {
+          $('#includedContent').html("");
+          $("#chathistory").empty();
+          $.get("/restart_session").done(function(data) {
+            console.log("Reset done");
+          });
+        }
+        
+     
+        function BotButtonClicked(id){
+            mapto = id.outerHTML.split('class="botButtons"')[1]
+            console.log("MATTO")
+            console.log(mapto)
+            mapto = mapto.split('onclick=')[0]
+            mapto = mapto.replace('mapto="','')
+            mapto = mapto.replace("\"",'')
+
+            console.log("MATTO")
+            console.log(mapto)
+
+            document.getElementById("textInput").value = mapto
+            getBotResponse();
+            
+        };
+      
+      
+
+      </script>
+
+
+
+
+    <script type="text/javascript">
+          function toggle_visibility(id) {
+              var e = document.getElementById(id);
+              if(e.style.display == 'block')
+                  e.style.display = 'none';
+              else
+                  e.style.display = 'block';
+          }
+
+    </script>
+
+  </body>
+</html>
