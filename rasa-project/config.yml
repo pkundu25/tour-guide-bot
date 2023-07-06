@@ -45,7 +45,8 @@
 language: en
 pipeline:
   - name: SpacyNLP
-    model: "en_core_web_sm"
+    #model: "en_core_web_sm"
+    model: "en_core_web_lg"
     #model: "en_proglang"
   - name: SpacyTokenizer
   #- name: CRFEntityExtractor               # uses the pretrained spacy NER model

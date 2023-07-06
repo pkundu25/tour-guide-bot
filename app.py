@@ -41,7 +41,7 @@ def get_bot_response():
     for t in  text:
         print(t)
         if 'custom' in t.keys():
-            loc = t['custom']['blocks']   
+            loc = t['custom']['blocks']                           
         else:                         
             final_text += t['text'] + " "
 

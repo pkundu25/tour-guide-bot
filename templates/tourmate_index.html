@@ -69,7 +69,7 @@
       <div class="widget">
          <div class="chat_header">
             <!--Add the name of the bot here -->
-            <span style="color:blue;margin-left: 5px;">Tourmate </span>
+            <!-- <span style="color:blue;margin-left: 5px;">Tourmate </span> -->
             <span style="color:blue;margin-right: 5px;float:right;margin-top: 5px;" id="close">
             <i class="material-icons">close</i>
             </span>
@@ -216,8 +216,18 @@
 
               $.get("/get", { msg: rawText }).done(function(data) {
               var botHtml = data;
+              if (data.includes("DOCTYPE html"))
+              {
+                console.log(" HTML DUMP !!!!")
+                $('#includedContent').html(botHtml);
+              }
+              else
+              {
+                console.log(" Non HTML  DUMP " )
+                $('#includedContent').html("");
+              }
               console.log(botHtml)
-              $('#includedContent').html(botHtml);
+              //$('#includedContent').html(botHtml);
 
               sleep(500);
               $("#chathistory > .botTyping").remove();

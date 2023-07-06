@@ -115,10 +115,7 @@ responses:
           lng4: "{lng4}"
           lat4: "{lat4}"
   utter_invalid_city_found:
-  - text: invalid city
-  - text: this is not a valid city
-  - text: city you mentioned is not a valid city
-  - text: please enter a valid city after reset
+  - text: No search results found. Please try out other place 
 
   utter_show_menu:
   - text: Please ask me about 'Weather' or 'Local search'

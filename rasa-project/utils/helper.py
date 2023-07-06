@@ -154,12 +154,13 @@ def Weather(city):
     
     Final_url = base_url + "appid=" + API_key + "&q=" + city + "&units=metric"
     weather_data = requests.get(Final_url).json()
-    print("_________________")
-    print(Final_url)
-    print(weather_data)
-    print("_________________")
-    
-    return weather_data['main']
+    #print("_________________")
+    #print(Final_url)
+    #print(weather_data)
+    #print("_________________")
+        
+    #return weather_data['main']
+    return weather_data.get('main')
 
 def LocalSearch(search, city, place_type):
       access_token = "pk.eyJ1IjoicGt1bmR1MjUiLCJhIjoiY2xoaWwwNDBrMDFyaDNrcGNvMmhrZXlsaCJ9.sOxWZOMT9vWN-YyhQm4cwg"
@@ -174,7 +175,7 @@ def LocalSearch(search, city, place_type):
       #print(url)
       local_search_data = requests.get(url).json()
       features = local_search_data['features']
-      print(features)
+      #print(features)
 
       #return local_search_data['features']
 
@@ -186,13 +187,16 @@ def LocalSearch(search, city, place_type):
       center_list = []
       for i in features:
             place_name = i['place_name'].lower()
+            
             if place_name.find(city) != -1:
+                #print(place_name)  
                 center_list.append(i['center'])
-      print("_____________________")                       
-      print(center_list)        
+      #print("_____________________")                       
+      #print(center_list) 
+     
       return center_list
       
-'''
+
 if __name__ == "__main__":
   #city = 'Berkeley CA'
   #temperature=Weather(city)['temp']
@@ -203,7 +207,51 @@ if __name__ == "__main__":
   #LocalSearch('Pune')
   #child()
   #print(wind_mph)
-  LocalSearch('gas station around goa', "Goa", "poi")
+  #LocalSearch('gas station around Panaji, goa', "Goa", "poi")
+  place_list = [
+      "Ponda",
+"Panjim", 
+"Vasco da Gama",
+"Verna",
+"Cancolim",
+"Baga", 
+"Calangute", 
+"Butterfly", 
+"Mapusa",
+"Agonda", 
+"Chapora", 
+"Sinquerim", 
+"Palolem", 
+"Anjuna", 
+"Cabo de Rama", 
+"Vagator",
+"Arambol",
+"Morjim",
+"Madgao"
+  ]
+  '''
+  for p in place_list:
+      l = LocalSearch(f"places around {p}", "Goa", "place%2Cpoi%2Clocality")
+      if len(l) == 0 : 
+        #print(f" {p} - not found\n\n")
+        print("not found")
+      else:
+        #print(f" {p} -  found\n\n")
+        print("found")
+    '''        
+            
   #app.run(debug=True, port = 8001)
+  
+  for p in place_list:
+      l = Weather(p)
+      #l = Weather(f"{p}, Goa")
+      #sprint(f"{p} - {l}")
+      if l is None : 
+        #print(f" {p} - not found\n\n")
+        print("not found")
+      else:
+        #print(f" {p} -  found\n\n")
+        print("found")
+            
+
  
-'''

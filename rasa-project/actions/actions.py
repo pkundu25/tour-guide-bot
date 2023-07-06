@@ -25,7 +25,7 @@ from flask import Flask, render_template, request, jsonify
 from datetime import datetime
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
-from rasa_sdk.events import SlotSet, FollowupAction
+from rasa_sdk.events import SlotSet, FollowupAction, Restarted, AllSlotsReset
 #from weather import Weather
 from utils.helper import LocalSearch
 from utils.helper import Weather
@@ -91,7 +91,8 @@ class ActionMenu(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         print("inside action menu")        
         dispatcher.utter_message(template="utter_show_menu")
-        return [SlotSet('LOC', None), SlotSet('GPE', None), SlotSet('location', None), SlotSet('poi', None)]
+        #return [SlotSet('LOC', None), SlotSet('GPE', None), SlotSet('location', None), SlotSet('poi', None)]
+        return [AllSlotsReset(), Restarted()]
         #return []
 
 class ActionWeome(Action):
@@ -256,7 +257,7 @@ class ActionSearchPlaces(Action):
             if poi == None:        
                 search1 = "place" + " around " + city
                 # features is a list  that contains centers (having list of values) around the search place
-                centers =  LocalSearch(search1, city, "place")
+                centers =  LocalSearch(search1, "Goa", "place%2Cpoi%2Clocality")
         
                 #center_list = [i['center'] for i in features]
                 '''
@@ -269,12 +270,16 @@ class ActionSearchPlaces(Action):
                 '''            
             else:
                 search = poi + " around " + city
-                centers =  LocalSearch(search, city, "poi")
+                centers =  LocalSearch(search, "Goa", "place%2Cpoi%2Clocality")
 
                 #(center, bbox)  = LocalSearch(city)
                 #center_list = []    
                 # center_list is a list if lists (each having 2 values)
-            if len(centers) < 5:
+            if len(centers) == 0:   
+                dispatcher.utter_message(template="utter_invalid_city_found")
+                return [FollowupAction(name = "action_menu")] 
+
+            elif len(centers) < 5:
                 center0 = centers[0]                
 
                 lng0 = center0[0]
